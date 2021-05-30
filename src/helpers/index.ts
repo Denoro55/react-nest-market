@@ -1,0 +1,1 @@
+export { getRoutePath, getRouteIndex } from './route';

@@ -1,10 +1,10 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const htmlPlugin = new HtmlWebPackPlugin({
   template: "./public/index.html",
-  favicon: './public/favicon.ico',
+  favicon: "./public/favicon.ico",
 });
 
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/,
       },
       {
@@ -31,37 +31,38 @@ module.exports = {
         loader: "file-loader",
         options: {
           name: "img/[name]-[hash:6].[ext]",
-          esModule: false
+          esModule: false,
         },
       },
       {
         test: /\.(woff|woff2|ttf|eot|otf)$/,
-        loader: 'file-loader',
+        loader: "file-loader",
         options: {
-          name: 'fonts/[name]-[hash:6].[ext]',
-          esModule: false
+          name: "fonts/[name]-[hash:6].[ext]",
+          esModule: false,
         },
       },
       {
         test: /\.svg$/,
-        loader: 'file-loader',
-        options: {
-          name: 'icons/[name]-[hash:6].[ext]',
-        },
+        use: ["@svgr/webpack"],
       },
     ],
   },
   resolve: {
     extensions: ["*", ".js", ".jsx", ".ts", ".tsx"],
-    modules: [path.resolve('./src'), path.resolve('./node_modules')],
+    modules: [path.resolve("./src"), path.resolve("./node_modules")],
     alias: {
-      images: path.resolve(__dirname, 'src/assets/images'),
-      fonts: path.resolve(__dirname, 'src/assets/fonts'),
+      images: path.resolve(__dirname, "src/assets/images"),
+      fonts: path.resolve(__dirname, "src/assets/fonts"),
     },
   },
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "bundle.js",
+    publicPath: "/", // nested routes redirect is working
   },
   plugins: [htmlPlugin, new CleanWebpackPlugin()],
+  devServer: {
+    historyApiFallback: true,
+  },
 };

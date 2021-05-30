@@ -6,22 +6,3 @@
 img {
   max-width: 100%;
 }
-
-.background-image {
-  width: 100px;
-  height: 50px;
-  background-image: url("~images/react.png");
-  background-size: cover;
-}
-
-@font-face {
-  font-family: "Lato";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("~fonts/Lato-Regular.woff") format("woff"); /* Safari, Android, iOS */
-}
-
-.font-lato {
-  font-family: "Lato", Arial, Helvetica, sans-serif;
-}
