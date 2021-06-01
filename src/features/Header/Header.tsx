@@ -11,13 +11,11 @@ const ROUTE_INDEX: Record<string, number> = {
   [routeNames.catalog]: 0,
   [routeNames.basket]: 1,
   [routeNames.orders]: 2,
-  [routeNames.delivery]: 3
-}
+  [routeNames.delivery]: 3,
+};
 
 const MAPPING_MENU_INDEXES: Record<number, string> = {
-  [ROUTE_INDEX[routeNames.catalog]]: getRoutePath(
-    routeNames.catalog
-  ) as string,
+  [ROUTE_INDEX[routeNames.catalog]]: getRoutePath(routeNames.catalog) as string,
   [ROUTE_INDEX[routeNames.basket]]: getRoutePath(routeNames.basket) as string,
   [ROUTE_INDEX[routeNames.orders]]: getRoutePath(routeNames.orders) as string,
   [ROUTE_INDEX[routeNames.delivery]]: getRoutePath(
@@ -48,8 +46,15 @@ export const Header: React.FC = () => {
       alignItems="center"
       justifyContent="space-between"
     >
-      <Menu activeIndex={menuIndex} onChange={handleChange} />
-      <Department />
+      <Menu
+        activeIndex={menuIndex}
+        tabs={["Товары", "Корзина", "Заказы", "Доставки"]}
+        onChange={handleChange}
+      />
+      <Department
+        label="Подразделение: Московское отделение № 2954"
+        onClick={() => undefined}
+      />
     </Box>
   );
 };

@@ -4,9 +4,10 @@ import { Tabs, Tab, Box } from "@material-ui/core";
 interface IMenu {
   activeIndex: number;
   onChange: (event: React.ChangeEvent<{}>, newValue: number) => void;
+  tabs: string[];
 }
 
-export const Menu: React.FC<IMenu> = ({ activeIndex, onChange }) => {
+export const Menu: React.FC<IMenu> = ({ activeIndex, onChange, tabs }) => {
   return (
     <Tabs
       value={activeIndex}
@@ -14,10 +15,9 @@ export const Menu: React.FC<IMenu> = ({ activeIndex, onChange }) => {
       textColor="primary"
       onChange={onChange}
     >
-      <Tab label="Каталог" />
-      <Tab label="Корзина" />
-      <Tab label="Заказы" />
-      <Tab label="Доставки" />
+      {tabs.map((label: string) => (
+        <Tab key={label} label={label} />
+      ))}
     </Tabs>
   );
 };

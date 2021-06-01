@@ -4,14 +4,19 @@ import { Chip } from "@material-ui/core";
 
 import { useStyles } from "./Department.styles";
 
-export const Department: React.FC = () => {
+interface IDepartmentProps {
+  label: string;
+  onClick: () => void;
+}
+
+export const Department: React.FC<IDepartmentProps> = ({ label, onClick }) => {
   const classes = useStyles();
 
   return (
     <Chip
       icon={<LocationOnIcon />}
-      label="Подразделение: Московское отделение № 2954"
-      onClick={() => undefined}
+      label={label}
+      onClick={onClick}
       classes={{
         root: classes.root,
       }}
