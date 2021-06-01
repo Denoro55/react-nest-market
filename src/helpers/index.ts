@@ -1,1 +1,1 @@
-export { getRoutePath, getRouteIndex } from './route';
+export { getRoutePath } from './route';

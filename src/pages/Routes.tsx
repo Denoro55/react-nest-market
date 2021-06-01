@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,14 +15,17 @@ export const Routes: React.FC = () => {
       <Box mb={2}>
         <Header />
       </Box>
-      <Switch>
-        {routes.map(({ name, exact, path, component: Component }) => (
-          <Route key={name} exact={exact} path={path}>
-            <Component />
-          </Route>
-        ))}
-        <Route path="/" render={() => <Redirect to="/catalog"/>}/>
-      </Switch>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          {routes.map(({ name, exact, path, component: Component }) => (
+            <Route key={name} exact={exact} path={path}>
+              <Component />
+            </Route>
+          ))}
+          {/* <Redirect to="/catalog" /> */}
+          <Route path="/" render={() => <Redirect to="/catalog" />} />
+        </Switch>
+      </Suspense>
     </Router>
   );
 };

@@ -2,18 +2,25 @@ import React, { useEffect } from "react";
 import { Box } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { Menu, Department } from "components";
-import { getRoutePath, getRouteIndex } from "helpers";
+import { getRoutePath } from "helpers";
 import { routeNames } from "constants/routes";
 
 import { useStyles } from "./Header.styles";
 
+const ROUTE_INDEX: Record<string, number> = {
+  [routeNames.catalog]: 0,
+  [routeNames.basket]: 1,
+  [routeNames.orders]: 2,
+  [routeNames.delivery]: 3
+}
+
 const MAPPING_MENU_INDEXES: Record<number, string> = {
-  [getRouteIndex(routeNames.catalog)]: getRoutePath(
+  [ROUTE_INDEX[routeNames.catalog]]: getRoutePath(
     routeNames.catalog
   ) as string,
-  [getRouteIndex(routeNames.basket)]: getRoutePath(routeNames.basket) as string,
-  [getRouteIndex(routeNames.orders)]: getRoutePath(routeNames.orders) as string,
-  [getRouteIndex(routeNames.delivery)]: getRoutePath(
+  [ROUTE_INDEX[routeNames.basket]]: getRoutePath(routeNames.basket) as string,
+  [ROUTE_INDEX[routeNames.orders]]: getRoutePath(routeNames.orders) as string,
+  [ROUTE_INDEX[routeNames.delivery]]: getRoutePath(
     routeNames.delivery
   ) as string,
 };
@@ -26,7 +33,7 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     const routeName = history.location.pathname.split("/")[1];
-    setMenuIndex(getRouteIndex(routeName));
+    setMenuIndex(ROUTE_INDEX[routeName]);
   }, []);
 
   const handleChange = (event: React.ChangeEvent<{}>, newIndex: number) => {
