@@ -8,7 +8,7 @@ import { Search } from "components";
 import { ShopsSidebar, CatalogCategories, ShopsList } from "features";
 
 import { Provider } from "./context";
-import { useGetShops } from "./hooks";
+import { useGetShops, useGetCategories } from "./hooks";
 
 export const CatalogPage: React.FC = () => {
   const history = useHistory();
@@ -16,17 +16,25 @@ export const CatalogPage: React.FC = () => {
 
   const { shops, loading } = useGetShops();
 
-  const handleShopClick = useCallback((shop) => {
-    const catalogPath = getRoutePath(routeNames.catalog) as string;
-
-    history.push({
-      pathname: catalogPath,
-      search: `?shop=${shop.id}`,
-    });
-  }, []);
-
   const selectedShop = getQuery(location.search).shop;
   const isShopSelected = !!selectedShop;
+
+  const { categories, loading: categoriesLoading } =
+    useGetCategories(selectedShop);
+
+  const handleShopClick = useCallback(
+    (shop) => {
+      if (isShopSelected && categoriesLoading) return;
+
+      const catalogPath = getRoutePath(routeNames.catalog) as string;
+
+      history.push({
+        pathname: catalogPath,
+        search: `?shop=${shop.id}`,
+      });
+    },
+    [isShopSelected, categoriesLoading]
+  );
 
   if (loading) return <LinearProgress />;
 
@@ -37,7 +45,9 @@ export const CatalogPage: React.FC = () => {
           <ShopsSidebar
             activeItem={selectedShop}
             onClick={handleShopClick}
-            items={shops}
+            shops={shops}
+            categories={categories}
+            categoriesLoading={categoriesLoading}
           />
         </Box>
         <Box ml={4} flex={1} minWidth={0}>

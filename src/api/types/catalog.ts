@@ -3,3 +3,8 @@ export interface IShopItem {
   label: string;
   image: string;
 }
+
+export interface ICategoryItem {
+  id: string;
+  label: string;
+}

@@ -6,6 +6,10 @@ export const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(1.25, 1.5),
       cursor: "pointer",
     },
+    subItem: {
+      padding: theme.spacing(0.75, 1.5),
+      cursor: "pointer",
+    },
     activeItem: {
       color: theme.palette.primary.main,
       fontWeight: theme.typography.fontWeightBold,

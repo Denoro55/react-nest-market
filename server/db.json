@@ -15,5 +15,15 @@
       "label": "Amazon",
       "image": "http://www.equiti.com/media/11666/amazon.jpg"
     }
+  ],
+  "categories": [
+    { "id": "tech", "label": "Бытовая техника", "shop": "dns" },
+    { "id": "phones", "label": "Смартфоны и гаджеты", "shop": "dns" },
+    { "id": "tv", "label": "ТВ и мультимедиа", "shop": "dns" },
+    { "id": "pc", "label": "Компьютеры", "shop": "dns" },
+    { "id": "office", "label": "Офис и сеть", "shop": "dns" },
+    { "id": "shoes", "label": "Обувь", "shop": "wildberries" },
+    { "id": "accessories", "label": "Аксессуары", "shop": "wildberries" },
+    { "id": "electorincs", "label": "Электроника", "shop": "wildberries" }
   ]
 }
