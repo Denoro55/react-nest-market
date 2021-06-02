@@ -5,10 +5,10 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import { routeNames } from "constants/routes";
 import { getRoutePath, getQuery } from "helpers";
 import { Search } from "components";
+import { ShopsSidebar, CatalogCategories, ShopsList } from "features";
 
 import { Provider } from "./context";
 import { useGetShops } from "./hooks";
-import { Sidebar, ShopList, Categories } from "./components";
 
 export const CatalogPage: React.FC = () => {
   const history = useHistory();
@@ -34,7 +34,7 @@ export const CatalogPage: React.FC = () => {
     <>
       <Box display="flex">
         <Box width={200}>
-          <Sidebar
+          <ShopsSidebar
             activeItem={selectedShop}
             onClick={handleShopClick}
             items={shops}
@@ -44,10 +44,10 @@ export const CatalogPage: React.FC = () => {
           {isShopSelected ? (
             <Box>
               <Search />
-              <Categories />
+              <CatalogCategories />
             </Box>
           ) : (
-            <ShopList onClick={handleShopClick} items={shops} />
+            <ShopsList onClick={handleShopClick} items={shops} />
           )}
         </Box>
       </Box>

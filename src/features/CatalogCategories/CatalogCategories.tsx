@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 
-export const Categories: React.FC = () => {
+export const CatalogCategories: React.FC = () => {
   const settings = {
     dots: true,
     infinite: true,

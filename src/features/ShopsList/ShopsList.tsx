@@ -1,16 +1,16 @@
 import React from "react";
 import { Box, Typography } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
+import { IShopItem } from "api/types/catalog";
 
-import { useStyles } from "./ShopList.styles";
-import { IShopItem } from "../../types";
+import { useStyles } from "./ShopsList.styles";
 
-interface IShopListProps {
+interface IShopsListProps {
   items: IShopItem[];
   onClick: (shop: IShopItem) => void;
 }
 
-export const ShopList: React.FC<IShopListProps> = ({ items, onClick }) => {
+export const ShopsList: React.FC<IShopsListProps> = ({ items, onClick }) => {
   const classes = useStyles();
 
   return (
