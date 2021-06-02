@@ -1,9 +1,19 @@
 import React from "react";
+import { Box } from "@material-ui/core";
+import { ICategoryItem } from "api/types/catalog";
 import Slider from "react-slick";
 
 import { useStyles } from "./CatalogCategories.styles";
 
-export const CatalogCategories: React.FC = () => {
+interface ICatalogCategoriesProps {
+  categories: ICategoryItem[];
+  onClick: (category: ICategoryItem) => void;
+}
+
+export const CatalogCategories: React.FC<ICatalogCategoriesProps> = ({
+  categories,
+  onClick,
+}) => {
   const styles = useStyles();
 
   const settings = {
@@ -16,9 +26,13 @@ export const CatalogCategories: React.FC = () => {
 
   return (
     <Slider {...settings}>
-      <div>
-        <h3>1</h3>
-      </div>
+      {categories.map((category: ICategoryItem) => (
+        <Box key={category.id}>
+          <Box onClick={() => onClick(category)} className={styles.slide}>
+            {category.label}
+          </Box>
+        </Box>
+      ))}
     </Slider>
   );
 };

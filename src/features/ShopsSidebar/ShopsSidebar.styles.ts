@@ -5,6 +5,7 @@ export const useStyles = makeStyles((theme: Theme) =>
     root: {
       padding: theme.spacing(1.25, 1.5),
       cursor: "pointer",
+      fontWeight: theme.typography.fontWeightBold,
     },
     subItem: {
       padding: theme.spacing(0.75, 1.5),

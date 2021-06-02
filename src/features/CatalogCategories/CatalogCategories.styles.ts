@@ -1,9 +1,14 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles(theme => {
+export const useStyles = makeStyles((theme) => {
   return {
-    header: {
-      borderBottom: `1px solid ${theme.palette.grey[300]}`,
+    slide: {
+      height: 100,
+      backgroundColor: theme.palette.grey[600],
+      borderRadius: theme.shape.borderRadius,
+      padding: 10,
+      color: theme.palette.common.white,
+      cursor: "pointer",
     },
-  }
+  };
 });

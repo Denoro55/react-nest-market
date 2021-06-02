@@ -1,29 +1,44 @@
 {
   "shops": [
     {
-      "id": "dns",
+      "id": 1,
+      "name": "dns",
       "label": "DNS",
       "image": "https://www.dns-shop.ru/assets/fc87bcf/images/theme/miniature.png"
     },
     {
-      "id": "wildberries",
+      "id": 2,
+      "name": "wildberries",
       "label": "Wildberries",
       "image": "https://wbcon.ru/wp-content/uploads/2019/10/WB.jpg"
     },
     {
-      "id": "amazon",
+      "id": 3,
+      "name": "amazon",
       "label": "Amazon",
       "image": "http://www.equiti.com/media/11666/amazon.jpg"
     }
   ],
   "categories": [
-    { "id": "tech", "label": "Бытовая техника", "shop": "dns" },
-    { "id": "phones", "label": "Смартфоны и гаджеты", "shop": "dns" },
-    { "id": "tv", "label": "ТВ и мультимедиа", "shop": "dns" },
-    { "id": "pc", "label": "Компьютеры", "shop": "dns" },
-    { "id": "office", "label": "Офис и сеть", "shop": "dns" },
-    { "id": "shoes", "label": "Обувь", "shop": "wildberries" },
-    { "id": "accessories", "label": "Аксессуары", "shop": "wildberries" },
-    { "id": "electorincs", "label": "Электроника", "shop": "wildberries" }
+    { "id": 1, "name": "appliances", "label": "Бытовая техника", "shop": "dns" },
+    { "id": 2, "name": "phones", "label": "Смартфоны и гаджеты", "shop": "dns" },
+    { "id": 3, "name": "tv", "label": "ТВ и мультимедиа", "shop": "dns" },
+    { "id": 4, "name": "pc", "label": "Компьютеры", "shop": "dns" },
+    { "id": 5, "name": "office", "label": "Офис и сеть", "shop": "dns" },
+
+    { "id": 1, "name": "drying", "label": "Стирка и сушка", "shop": "dns", "parentName": "appliances" },
+    { "id": 2, "name": "cleaning", "label": "Уборка", "shop": "dns", "parentName": "appliances" },
+    { "id": 3, "name": "summerClimate", "label": "Летний климат", "shop": "dns", "parentName": "appliances" },
+    { "id": 4, "name": "winterClimate", "label": "Зимний климат", "shop": "dns", "parentName": "appliances" },
+    { "id": 5, "name": "smartHouse", "label": "Умный дом", "shop": "dns", "parentName": "appliances" },
+    { "id": 6, "name": "clock", "label": "Часы", "shop": "dns", "parentName": "appliances" },
+    { "id": 7, "name": "laptops", "label": "Ноутбуки", "shop": "dns", "parentName": "pc" },
+    { "id": 8, "name": "monoblocks", "label": "Моноболоки", "shop": "dns", "parentName": "pc" },
+    { "id": 9, "name": "videoCards", "label": "Видеокарты", "shop": "dns", "parentName": "pc" },
+    { "id": 10, "name": "monitors", "label": "Мониторы", "shop": "dns", "parentName": "pc" },
+
+    { "id": 1, "name": "shoes", "label": "Обувь", "shop": "wildberries" },
+    { "id": 2, "name": "accessories", "label": "Аксессуары", "shop": "wildberries" },
+    { "id": 3, "name": "electorincs", "label": "Электроника", "shop": "wildberries" }
   ]
 }
