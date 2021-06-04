@@ -11,3 +11,9 @@ export interface ICategoryItem {
   label: string;
   parentName?: string;
 }
+
+export interface IProductItem {
+  id: string;
+  name: string;
+  image: string;
+}

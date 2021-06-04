@@ -20,25 +20,131 @@
     }
   ],
   "categories": [
-    { "id": 1, "name": "appliances", "label": "Бытовая техника", "shop": "dns" },
-    { "id": 2, "name": "phones", "label": "Смартфоны и гаджеты", "shop": "dns" },
+    {
+      "id": 1,
+      "name": "appliances",
+      "label": "Бытовая техника",
+      "shop": "dns"
+    },
+    {
+      "id": 2,
+      "name": "phones",
+      "label": "Смартфоны и гаджеты",
+      "shop": "dns"
+    },
     { "id": 3, "name": "tv", "label": "ТВ и мультимедиа", "shop": "dns" },
     { "id": 4, "name": "pc", "label": "Компьютеры", "shop": "dns" },
     { "id": 5, "name": "office", "label": "Офис и сеть", "shop": "dns" },
 
-    { "id": 1, "name": "drying", "label": "Стирка и сушка", "shop": "dns", "parentName": "appliances" },
-    { "id": 2, "name": "cleaning", "label": "Уборка", "shop": "dns", "parentName": "appliances" },
-    { "id": 3, "name": "summerClimate", "label": "Летний климат", "shop": "dns", "parentName": "appliances" },
-    { "id": 4, "name": "winterClimate", "label": "Зимний климат", "shop": "dns", "parentName": "appliances" },
-    { "id": 5, "name": "smartHouse", "label": "Умный дом", "shop": "dns", "parentName": "appliances" },
-    { "id": 6, "name": "clock", "label": "Часы", "shop": "dns", "parentName": "appliances" },
-    { "id": 7, "name": "laptops", "label": "Ноутбуки", "shop": "dns", "parentName": "pc" },
-    { "id": 8, "name": "monoblocks", "label": "Моноболоки", "shop": "dns", "parentName": "pc" },
-    { "id": 9, "name": "videoCards", "label": "Видеокарты", "shop": "dns", "parentName": "pc" },
-    { "id": 10, "name": "monitors", "label": "Мониторы", "shop": "dns", "parentName": "pc" },
+    {
+      "id": 6,
+      "name": "drying",
+      "label": "Стирка и сушка",
+      "shop": "dns",
+      "parentName": "appliances"
+    },
+    {
+      "id": 7,
+      "name": "cleaning",
+      "label": "Уборка",
+      "shop": "dns",
+      "parentName": "appliances"
+    },
+    {
+      "id": 8,
+      "name": "summerClimate",
+      "label": "Летний климат",
+      "shop": "dns",
+      "parentName": "appliances"
+    },
+    {
+      "id": 9,
+      "name": "winterClimate",
+      "label": "Зимний климат",
+      "shop": "dns",
+      "parentName": "appliances"
+    },
+    {
+      "id": 10,
+      "name": "smartHouse",
+      "label": "Умный дом",
+      "shop": "dns",
+      "parentName": "appliances"
+    },
+    {
+      "id": 11,
+      "name": "clock",
+      "label": "Часы",
+      "shop": "dns",
+      "parentName": "appliances"
+    },
+    {
+      "id": 12,
+      "name": "laptops",
+      "label": "Ноутбуки",
+      "shop": "dns",
+      "parentName": "pc"
+    },
+    {
+      "id": 13,
+      "name": "monoblocks",
+      "label": "Моноболоки",
+      "shop": "dns",
+      "parentName": "pc"
+    },
+    {
+      "id": 14,
+      "name": "videoCards",
+      "label": "Видеокарты",
+      "shop": "dns",
+      "parentName": "pc"
+    },
+    {
+      "id": 15,
+      "name": "monitors",
+      "label": "Мониторы",
+      "shop": "dns",
+      "parentName": "pc"
+    },
 
-    { "id": 1, "name": "shoes", "label": "Обувь", "shop": "wildberries" },
-    { "id": 2, "name": "accessories", "label": "Аксессуары", "shop": "wildberries" },
-    { "id": 3, "name": "electorincs", "label": "Электроника", "shop": "wildberries" }
+    { "id": 16, "name": "shoes", "label": "Обувь", "shop": "wildberries" },
+    {
+      "id": 17,
+      "name": "accessories",
+      "label": "Аксессуары",
+      "shop": "wildberries"
+    },
+    {
+      "id": 18,
+      "name": "electorincs",
+      "label": "Электроника",
+      "shop": "wildberries"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "image": "https://c.dns-shop.ru/thumb/st4/fit_width/120/120/28231463858bc6a11308e3c02c9dbe2f/c2434bd689e37e0f21727be013e835d2aff6f318e0e22a6e23093a0688e50b47.jpg",
+      "name": "Сушилки для овощей и фруктов",
+      "shop": "dns"
+    },
+    {
+      "id": 2,
+      "image": "https://c.dns-shop.ru/thumb/st4/fit_width/120/120/12f7bc077ec26ebb09622145eb864a80/68d3c98a60aac4800fd0c22502b2bc357a6ff21e91f6e8395282a962d651959f.jpg",
+      "name": "Сепараторы молока",
+      "shop": "dns"
+    },
+    {
+      "id": 3,
+      "image": "https://c.dns-shop.ru/thumb/st4/fit_width/120/120/27aa3c9094967fff26da8a72b6906a3f/62de37e37cfe70d7aaf59d2bbda06f732435642d576b3a4ace22ce54e6d2e160.jpg",
+      "name": "Проращиватели семян",
+      "shop": "dns"
+    },
+    {
+      "id": 4,
+      "image": "https://c.dns-shop.ru/thumb/st4/fit_width/120/120/c989f64a2ffef402c10d87408200fa47/87006c1e76ec73133b81b9a79720f56b7dedc5f8dd2ecaed130837d6d1a7b4f0.jpg",
+      "name": "Ароматизаторы кухонные",
+      "shop": "dns"
+    }
   ]
 }

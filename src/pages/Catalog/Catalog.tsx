@@ -5,11 +5,16 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import { routeNames } from "constants/routes";
 import { getRoutePath, getQuery } from "helpers";
 import { Search } from "components";
-import { ShopsSidebar, CatalogCategories, ShopsList } from "features";
+import {
+  ShopsSidebar,
+  CatalogCategories,
+  ShopsList,
+  ProductsList,
+} from "features";
 import { ICategoryItem, IShopItem } from "api/types/catalog";
 
 import { Provider } from "./context";
-import { useGetShops, useGetCategories } from "./hooks";
+import { useGetShops, useGetCategories, useGetProducts } from "./hooks";
 
 export const CatalogPage: React.FC = () => {
   const history = useHistory();
@@ -25,6 +30,8 @@ export const CatalogPage: React.FC = () => {
 
   const { categories, loading: categoriesLoading } =
     useGetCategories(selectedShop);
+
+  const { products, loading: productsLoading } = useGetProducts(selectedShop);
 
   const handleShopClick = useCallback(
     (shop) => {
@@ -50,7 +57,7 @@ export const CatalogPage: React.FC = () => {
 
   const handleChildCategoryClick = useCallback(
     (category: ICategoryItem) => {
-      const categoryParent = categories.find(c => {
+      const categoryParent = categories.find((c) => {
         return c.name === category.parentName;
       });
 
@@ -92,10 +99,13 @@ export const CatalogPage: React.FC = () => {
               <Box mb={2}>
                 <Search />
               </Box>
-              <CatalogCategories
-                categories={childCategories}
-                onClick={handleChildCategoryClick}
-              />
+              <Box mb={4}>
+                <CatalogCategories
+                  categories={childCategories}
+                  onClick={handleChildCategoryClick}
+                />
+              </Box>
+              <ProductsList products={products} />
             </Box>
           ) : (
             <ShopsList onClick={handleShopClick} items={shops} />
