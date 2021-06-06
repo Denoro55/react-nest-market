@@ -1,17 +1,17 @@
 import { get } from "api/instance/request";
 import { IShopItem, IProductItem } from "./types/catalog";
 
-export const getShops = () => get<IShopItem[]>("shops");
+export const getShops = () => get<IShopItem[]>("catalog/shops");
 
 export const getCategories = (shop: string) =>
-  get<IShopItem[]>("categories", {
+  get<IShopItem[]>("catalog/categories", {
     params: {
       shop,
     },
   });
 
 export const getProducts = (shop: string) =>
-  get<IProductItem[]>("products", {
+  get<IProductItem[]>("catalog/products", {
     params: {
       shop,
     },
