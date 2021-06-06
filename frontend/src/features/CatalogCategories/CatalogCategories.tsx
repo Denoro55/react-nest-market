@@ -17,8 +17,7 @@ export const CatalogCategories: React.FC<ICatalogCategoriesProps> = ({
   const styles = useStyles();
 
   const settings = {
-    dots: true,
-    infinite: true,
+    infinite: categories.length > 4,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,

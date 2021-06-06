@@ -1,2 +1,2 @@
 export { getRoutePath } from './route';
-export { getQuery } from './getQuery';
+export { getQuery, stringifyQuery } from './query';

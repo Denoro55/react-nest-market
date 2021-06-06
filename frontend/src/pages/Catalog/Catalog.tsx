@@ -1,9 +1,8 @@
-import React, { useCallback } from "react";
-import { useHistory, useLocation } from "react-router-dom";
-import { Box } from "@material-ui/core";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import { routeNames } from "constants/routes";
-import { getRoutePath, getQuery } from "helpers";
+import React, { useCallback, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { Box, LinearProgress } from "@material-ui/core";
+import { Alert, Pagination } from "@material-ui/lab";
+import { getQuery } from "helpers";
 import { Search } from "components";
 import {
   ShopsSidebar,
@@ -14,70 +13,100 @@ import {
 import { ICategoryItem, IShopItem } from "api/types/catalog";
 
 import { Provider } from "./context";
-import { useGetShops, useGetCategories, useGetProducts } from "./hooks";
+import {
+  useGetShops,
+  useGetCategories,
+  useGetProducts,
+  useGetQuery,
+} from "./hooks";
 
 export const CatalogPage: React.FC = () => {
-  const history = useHistory();
   const location = useLocation();
 
-  const { shops, loading } = useGetShops();
+  const {
+    shops,
+    loading,
+    hasError: shopsError,
+    isLoaded: isShopsLoaded,
+  } = useGetShops();
 
   const query = getQuery(location.search);
-  const { shop: selectedShop, category: selectedCategory } = query;
-  const isShopSelected = !!selectedShop;
+  const {
+    shop: queryShop,
+    category: queryCategory,
+    subCategory: querySubCategory,
+    page: queryPage = 1,
+  } = query;
+  const isShopSelected = !!queryShop;
 
-  const catalogPath = getRoutePath(routeNames.catalog) as string;
+  const [page, setPage] = useState(+queryPage);
+  const [selectedShop, setSelectedShop] = useState(queryShop);
+  const [selectedCategory, setSelectedCategory] = useState(queryCategory);
+  const [selectedSubCategory, setSelectedSubCategory] =
+    useState(querySubCategory);
+
+  useGetQuery(selectedShop, selectedCategory, selectedSubCategory, page);
 
   const { categories, loading: categoriesLoading } =
     useGetCategories(selectedShop);
 
   const { products, loading: productsLoading } = useGetProducts(selectedShop);
 
-  const handleShopClick = useCallback(
-    (shop) => {
-      if (isShopSelected && categoriesLoading) return;
-
-      history.push({
-        pathname: catalogPath,
-        search: `?shop=${shop.name}`,
-      });
-    },
-    [isShopSelected, categoriesLoading]
-  );
-
-  const handleCategoryClick = useCallback(
-    (shop: IShopItem, category: ICategoryItem) => {
-      history.push({
-        pathname: catalogPath,
-        search: `?shop=${shop.name}&category=${category.name}`,
-      });
+  const handleChangePagination = useCallback(
+    (event: React.ChangeEvent<unknown>, page: number) => {
+      setPage(page);
     },
     []
   );
 
-  const handleChildCategoryClick = useCallback(
+  const handleShopClick = useCallback(
+    (shop: IShopItem) => {
+      if (isShopSelected && categoriesLoading) return;
+
+      setSelectedShop(shop.name);
+      setSelectedCategory("");
+      setSelectedSubCategory("");
+      setPage(1);
+    },
+    [isShopSelected, categoriesLoading, setSelectedShop]
+  );
+
+  const handleCategoryClick = useCallback(
+    (shop: IShopItem, category: ICategoryItem) => {
+      setSelectedCategory(category.name);
+      setSelectedSubCategory("");
+      setPage(1);
+    },
+    []
+  );
+
+  const handleSubCategoryClick = useCallback(
     (category: ICategoryItem) => {
+      setSelectedSubCategory(category.name);
+      setPage(1);
+
       const categoryParent = categories.find((c) => {
         return c.name === category.parentName;
       });
 
       if (categoryParent) {
-        history.push({
-          pathname: catalogPath,
-          search: `?shop=${selectedShop}&category=${categoryParent.name}`,
-        });
+        setSelectedCategory(categoryParent.name);
       }
     },
     [categories]
   );
 
+  if (loading) return <LinearProgress />;
+
+  if (shopsError)
+    return <Alert severity="error">Ошибка загрузки данных!</Alert>;
+
   const firstCategories = categories.filter((c) => !c.parentName);
-  const childCategories = categories.filter((c) => {
+  const subCategories = categories.filter((c) => {
     if (!selectedCategory) return c.parentName;
     return c.parentName && c.parentName === selectedCategory;
   });
-
-  if (loading) return <LinearProgress />;
+  const paginationPages = Math.ceil(products.length / 8);
 
   return (
     <>
@@ -96,16 +125,30 @@ export const CatalogPage: React.FC = () => {
         <Box ml={4} flex={1} minWidth={0}>
           {isShopSelected ? (
             <Box>
-              <Box mb={2}>
+              <Box mb={3}>
                 <Search />
               </Box>
+              {subCategories.length > 0 && (
+                <Box mb={4}>
+                  <CatalogCategories
+                    categories={subCategories}
+                    onClick={handleSubCategoryClick}
+                  />
+                </Box>
+              )}
               <Box mb={4}>
-                <CatalogCategories
-                  categories={childCategories}
-                  onClick={handleChildCategoryClick}
-                />
+                <Box mb={5}>
+                  <ProductsList products={products} />
+                </Box>
+                {paginationPages > 0 && (
+                  <Pagination
+                    page={page}
+                    count={paginationPages}
+                    color="secondary"
+                    onChange={handleChangePagination}
+                  />
+                )}
               </Box>
-              <ProductsList products={products} />
             </Box>
           ) : (
             <ShopsList onClick={handleShopClick} items={shops} />
