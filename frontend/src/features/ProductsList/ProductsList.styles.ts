@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       flexDirection: "column",
       padding: theme.spacing(2),
-      height: 250,
+      height: 300,
     },
     imageWrapper: {
       display: "flex",

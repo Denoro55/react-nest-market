@@ -32,9 +32,9 @@ export const CatalogPage: React.FC = () => {
 
   const query = getQuery(location.search);
   const {
-    shop: queryShop,
-    category: queryCategory,
-    subCategory: querySubCategory,
+    shop: queryShop = "",
+    category: queryCategory = "",
+    subCategory: querySubCategory = "",
     page: queryPage = 1,
   } = query;
   const isShopSelected = !!queryShop;
@@ -50,7 +50,11 @@ export const CatalogPage: React.FC = () => {
   const { categories, loading: categoriesLoading } =
     useGetCategories(selectedShop);
 
-  const { products, loading: productsLoading } = useGetProducts(selectedShop);
+  const {
+    products,
+    total: totalPages,
+    loading: productsLoading,
+  } = useGetProducts(selectedShop, page, selectedCategory, selectedSubCategory);
 
   const handleChangePagination = useCallback(
     (event: React.ChangeEvent<unknown>, page: number) => {
@@ -106,7 +110,6 @@ export const CatalogPage: React.FC = () => {
     if (!selectedCategory) return c.parentName;
     return c.parentName && c.parentName === selectedCategory;
   });
-  const paginationPages = Math.ceil(products.length / 8);
 
   return (
     <>
@@ -140,10 +143,10 @@ export const CatalogPage: React.FC = () => {
                 <Box mb={5}>
                   <ProductsList products={products} />
                 </Box>
-                {paginationPages > 0 && (
+                {totalPages > 0 && (
                   <Pagination
                     page={page}
-                    count={paginationPages}
+                    count={totalPages}
                     color="secondary"
                     onChange={handleChangePagination}
                   />

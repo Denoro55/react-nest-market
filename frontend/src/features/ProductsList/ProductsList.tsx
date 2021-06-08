@@ -1,6 +1,6 @@
 import React from "react";
 import { IProductItem } from "api/types/catalog";
-import { Box, Grid, Paper } from "@material-ui/core";
+import { Box, Grid, Paper, Typography, Button } from "@material-ui/core";
 
 import { useStyles } from "./ProductsList.styles";
 
@@ -14,12 +14,25 @@ export const ProductsList: React.FC<IProductsListProps> = ({ products }) => {
   return (
     <Grid container spacing={3}>
       {products.map((product) => (
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <Paper className={classes.paper}>
             <Box className={classes.imageWrapper}>
               <img src={product.image} alt="" />
             </Box>
-            <Box className={classes.name}>{product.name}</Box>
+            <Box mb={2} className={classes.name}>
+              {product.name}
+            </Box>
+            <Box display="flex" justifyContent="space-between" alignItems="center">
+              <Typography variant="h6">
+                {Intl.NumberFormat("ru-RU", {
+                  style: "currency",
+                  currency: "rub",
+                }).format(product.price)}
+              </Typography>
+              <Button variant="contained" color="primary">
+                В корзину
+              </Button>
+            </Box>
           </Paper>
         </Grid>
       ))}

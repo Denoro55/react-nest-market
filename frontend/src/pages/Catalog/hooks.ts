@@ -3,11 +3,16 @@ import { useSnackbar } from "notistack";
 import { IShopItem, ICategoryItem } from "api/types/catalog";
 import { getShops, getCategories, getProducts } from "api/catalog";
 import { useSafeAsync } from "hooks";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { routeNames } from "constants/routes";
 import { getRoutePath, stringifyQuery } from "helpers";
 
-import { IProductItem } from "./../../api/types/catalog";
+import { IProductResponse } from "./../../api/types/catalog";
+
+const INITIAL_PRODUCTS_DATA: IProductResponse = {
+  products: [],
+  total: 0,
+};
 
 export const useGetShops = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -75,22 +80,31 @@ export const useGetCategories = (shop: string) => {
   return { categories, loading };
 };
 
-export const useGetProducts = (shop: string) => {
+export const useGetProducts = (
+  shop: string,
+  page: number,
+  category: string,
+  subCategory: string
+) => {
   const { enqueueSnackbar } = useSnackbar();
   const safeAsync = useSafeAsync();
 
-  const [products, setProducts] = useState<IProductItem[]>([]);
+  const [response, setResponse] = useState<IProductResponse>(
+    INITIAL_PRODUCTS_DATA
+  );
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setProducts([]);
+    setResponse(INITIAL_PRODUCTS_DATA);
 
     if (shop) {
       setLoading(true);
 
-      safeAsync<IProductItem[]>(getProducts(shop))
+      safeAsync<IProductResponse>(
+        getProducts(shop, page, category, subCategory)
+      )
         .then((response) => {
-          setProducts(response.data);
+          setResponse(response.data);
           setLoading(false);
         })
         .catch((err) => {
@@ -102,9 +116,11 @@ export const useGetProducts = (shop: string) => {
           setLoading(false);
         });
     }
-  }, [shop]);
+  }, [shop, page, category, subCategory]);
 
-  return { products, loading };
+  const { products, total } = response;
+
+  return { products, loading, total };
 };
 
 export const useGetQuery = (

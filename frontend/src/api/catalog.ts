@@ -10,9 +10,12 @@ export const getCategories = (shop: string) =>
     },
   });
 
-export const getProducts = (shop: string) =>
+export const getProducts = (shop: string, page: number, category: string, subCategory: string) =>
   get<IProductItem[]>("catalog/products", {
     params: {
       shop,
+      page,
+      category,
+      subCategory,
     },
   });
