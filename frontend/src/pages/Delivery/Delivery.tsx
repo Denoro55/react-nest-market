@@ -1,9 +1,5 @@
-import React from 'react';
+import React from "react";
 
 export const Delivery: React.FC = () => {
-  return (
-    <div>
-      Page Delivery
-    </div>
-  )
-}
+  return <div>Page Delivery</div>;
+};

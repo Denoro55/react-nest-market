@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Box, LinearProgress } from "@material-ui/core";
 import { Alert, Pagination } from "@material-ui/lab";
+import { useSelector, useDispatch } from "react-redux";
 import { getQuery } from "helpers";
 import { Search } from "components";
 import {
@@ -31,12 +32,14 @@ export const CatalogPage: React.FC = () => {
   } = useGetShops();
 
   const query = getQuery(location.search);
+
   const {
     shop: queryShop = "",
     category: queryCategory = "",
     subCategory: querySubCategory = "",
     page: queryPage = 1,
   } = query;
+
   const isShopSelected = !!queryShop;
 
   const [page, setPage] = useState(+queryPage);
@@ -103,7 +106,7 @@ export const CatalogPage: React.FC = () => {
   if (loading) return <LinearProgress />;
 
   if (shopsError)
-    return <Alert severity="error">Ошибка загрузки данных!</Alert>;
+    return <Alert severity="error">Ошибка загрузки магазинов!</Alert>;
 
   const firstCategories = categories.filter((c) => !c.parentName);
   const subCategories = categories.filter((c) => {

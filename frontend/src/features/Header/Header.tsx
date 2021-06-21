@@ -1,10 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import { Menu, Department } from "components";
 import { getRoutePath } from "helpers";
 import { routeNames } from "constants/routes";
+import { useUserStore } from "hooks";
+import { setSelectedDepartment } from "store/reducers/user";
+import { IDepartment } from "api/types/user";
 
+import { HeaderModal } from "./HeaderModal";
 import { useStyles } from "./Header.styles";
 
 const ROUTE_INDEX: Record<string, number> = {
@@ -24,10 +30,13 @@ const MAPPING_MENU_INDEXES: Record<number, string> = {
 };
 
 export const Header: React.FC = () => {
+  const user = useUserStore();
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
 
-  const [menuIndex, setMenuIndex] = React.useState(0);
+  const [menuIndex, setMenuIndex] = useState(0);
+  const [isModalOpened, setModalOpened] = useState(false);
 
   useEffect(() => {
     const routeName = history.location.pathname.split("/")[1];
@@ -39,22 +48,38 @@ export const Header: React.FC = () => {
     history.push(MAPPING_MENU_INDEXES[newIndex]);
   };
 
+  const handleModalToggle = () => {
+    setModalOpened((p) => !p);
+  };
+
+  const handleSubmit = (selectedDepartment: IDepartment | null) => {
+    handleModalToggle();
+    dispatch(setSelectedDepartment(selectedDepartment));
+  };
+
   return (
-    <Box
-      className={classes.header}
-      display="flex"
-      alignItems="center"
-      justifyContent="space-between"
-    >
-      <Menu
-        activeIndex={menuIndex}
-        tabs={["Товары", "Корзина", "Заказы", "Доставки"]}
-        onChange={handleChange}
+    <>
+      <Box
+        className={classes.header}
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <Menu
+          activeIndex={menuIndex}
+          tabs={["Товары", "Корзина", "Заказы", "Доставки"]}
+          onChange={handleChange}
+        />
+        <Department
+          label={user.selectedDepartment?.title || "Подразделение не выбрано"}
+          onClick={handleModalToggle}
+        />
+      </Box>
+      <HeaderModal
+        open={isModalOpened}
+        onClose={handleModalToggle}
+        onSubmit={handleSubmit}
       />
-      <Department
-        label="Подразделение: Московское отделение № 2954"
-        onClick={() => undefined}
-      />
-    </Box>
+    </>
   );
 };
