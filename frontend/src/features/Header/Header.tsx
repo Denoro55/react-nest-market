@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 import { Menu, Department } from "components";
 import { getRoutePath } from "helpers";
 import { routeNames } from "constants/routes";
-import { useUserStore } from "hooks";
-import { setSelectedDepartment } from "store/reducers/user";
+import { useUserStore, useTotalProducts } from "store/hooks";
+import { setSelectedDepartment } from "store/user";
 import { IDepartment } from "api/types/user";
 
 import { HeaderModal } from "./HeaderModal";
@@ -29,11 +29,19 @@ const MAPPING_MENU_INDEXES: Record<number, string> = {
   ) as string,
 };
 
+const TABS = [
+  { id: routeNames.catalog, label: "Товары" },
+  { id: routeNames.basket, label: "Корзина" },
+  { id: routeNames.orders, label: "Заказы" },
+  { id: routeNames.delivery, label: "Доставки" }
+];
+
 export const Header: React.FC = () => {
   const user = useUserStore();
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
+  const totalProducts = useTotalProducts();
 
   const [menuIndex, setMenuIndex] = useState(0);
   const [isModalOpened, setModalOpened] = useState(false);
@@ -57,6 +65,13 @@ export const Header: React.FC = () => {
     dispatch(setSelectedDepartment(selectedDepartment));
   };
 
+  const counters = {
+    [routeNames.catalog]: 0,
+    [routeNames.basket]: totalProducts,
+    [routeNames.orders]: 0,
+    [routeNames.delivery]: 0,
+  }
+
   return (
     <>
       <Box
@@ -67,8 +82,9 @@ export const Header: React.FC = () => {
       >
         <Menu
           activeIndex={menuIndex}
-          tabs={["Товары", "Корзина", "Заказы", "Доставки"]}
+          tabs={TABS}
           onChange={handleChange}
+          counters={counters}
         />
         <Department
           label={user.selectedDepartment?.title || "Подразделение не выбрано"}

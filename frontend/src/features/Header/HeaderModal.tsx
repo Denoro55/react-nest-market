@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Typography, TextField, Button } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { IDepartment } from "api/types/user";
-import { useUserStore } from "hooks";
+import { useUserStore } from "store/hooks";
 
 import { Modal } from "components/Modal";
 

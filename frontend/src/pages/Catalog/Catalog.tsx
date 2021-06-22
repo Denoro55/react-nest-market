@@ -113,6 +113,7 @@ export const CatalogPage: React.FC = () => {
     if (!selectedCategory) return c.parentName;
     return c.parentName && c.parentName === selectedCategory;
   });
+  const currentShop = shops.find(sh => sh.name === selectedShop);
 
   return (
     <>
@@ -144,7 +145,7 @@ export const CatalogPage: React.FC = () => {
               )}
               <Box mb={4}>
                 <Box mb={5}>
-                  <ProductsList products={products} />
+                  <ProductsList shop={currentShop} products={products} />
                 </Box>
                 {totalPages > 0 && (
                   <Pagination

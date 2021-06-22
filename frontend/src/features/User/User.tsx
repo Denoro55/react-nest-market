@@ -3,7 +3,7 @@ import { Box, CircularProgress } from "@material-ui/core";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
 
-import { setUser } from "store/reducers/user";
+import { setUser } from "store/user";
 import { getUser } from "api/user";
 
 interface IUserProps {

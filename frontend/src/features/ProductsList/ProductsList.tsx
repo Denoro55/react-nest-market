@@ -1,20 +1,35 @@
 import React from "react";
-import { IProductItem } from "api/types/catalog";
+import { useDispatch } from "react-redux";
+
+import { useUserStore } from "store/hooks";
+import { IProductItem, IShopItem } from "api/types/catalog";
 import { Box, Grid, Paper, Typography, Button } from "@material-ui/core";
+import { addProduct } from 'store/user'
 
 import { useStyles } from "./ProductsList.styles";
 
 interface IProductsListProps {
+  shop: IShopItem | undefined;
   products: IProductItem[];
 }
 
-export const ProductsList: React.FC<IProductsListProps> = ({ products }) => {
+export const ProductsList: React.FC<IProductsListProps> = ({ products, shop }) => {
+  const dispatch = useDispatch();
+  const user = useUserStore();
   const classes = useStyles();
+
+  const handleAddToBasket = (shop: IShopItem | undefined, product: IProductItem) => {
+    const selectedDepartment = user.selectedDepartment;
+
+    if (!shop || !selectedDepartment) return;
+
+    dispatch(addProduct({shop, product, department: selectedDepartment}))
+  }
 
   return (
     <Grid container spacing={3}>
       {products.map((product) => (
-        <Grid item xs={4}>
+        <Grid key={product.id} item xs={4}>
           <Paper className={classes.paper}>
             <Box className={classes.imageWrapper}>
               <img src={product.image} alt="" />
@@ -29,7 +44,7 @@ export const ProductsList: React.FC<IProductsListProps> = ({ products }) => {
                   currency: "rub",
                 }).format(product.price)}
               </Typography>
-              <Button variant="contained" color="primary">
+              <Button onClick={() => handleAddToBasket(shop, product)} variant="contained" color="primary">
                 В корзину
               </Button>
             </Box>

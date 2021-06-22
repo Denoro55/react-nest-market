@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import reduxThunkMiddleware from "redux-thunk";
 
-import { appReducer, userReducer } from "./reducers";
+import userReducer from "./user";
 
 const loggerMiddleware = (store: any) => (next: any) => (action: any) => {
   console.group(action.type);
@@ -14,7 +14,6 @@ const loggerMiddleware = (store: any) => (next: any) => (action: any) => {
 
 const store = configureStore({
   reducer: {
-    app: appReducer,
     user: userReducer,
   },
   middleware: [loggerMiddleware, reduxThunkMiddleware],
