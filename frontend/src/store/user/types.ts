@@ -1,19 +1,17 @@
 import { IProductItem, IShopItem } from "api/types/catalog";
 import { IDepartment } from "api/types/user";
 
-export type BasketType = Record<
-  string,
-  {
-    department: IDepartment;
-    shops: Record<
-      string,
-      {
-        shop: IShopItem;
-        products: Record<string, IBasketProduct>;
-      }
-    >;
-  }
->;
+export type BasketShopType = {
+  shop: IShopItem;
+  products: Record<string, IBasketProduct>;
+};
+
+export type BasketDepartmentType = {
+  department: IDepartment;
+  shops: Record<string, BasketShopType>;
+};
+
+export type BasketType = Record<string, BasketDepartmentType>;
 
 export interface IInitialState {
   departments: IDepartment[];

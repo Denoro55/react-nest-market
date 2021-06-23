@@ -2,7 +2,6 @@ import React, { useCallback, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Box, LinearProgress } from "@material-ui/core";
 import { Alert, Pagination } from "@material-ui/lab";
-import { useSelector, useDispatch } from "react-redux";
 import { getQuery } from "helpers";
 import { Search } from "components";
 import {

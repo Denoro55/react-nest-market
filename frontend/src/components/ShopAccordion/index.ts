@@ -1,0 +1,1 @@
+export { ShopAccordion } from "./ShopAccordion";
