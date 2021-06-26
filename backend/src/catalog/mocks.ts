@@ -118,6 +118,20 @@ export const MOCK_CATEGORIES = [
     label: 'Электроника',
     shop: 'wildberries',
   },
+  {
+    id: 19,
+    name: 'maleShoes',
+    label: 'Мужская',
+    shop: 'wildberries',
+    parentName: 'shoes',
+  },
+  {
+    id: 20,
+    name: 'femaleShoes',
+    label: 'Женская',
+    shop: 'wildberries',
+    parentName: 'shoes',
+  },
 ];
 
 export const MOCK_PRODUCTS = [
@@ -130,6 +144,7 @@ export const MOCK_PRODUCTS = [
     price: 10000,
     category: 'appliances',
     subCategory: 'drying',
+    max: 66,
   },
   {
     id: 2,
@@ -140,6 +155,7 @@ export const MOCK_PRODUCTS = [
     price: 16000,
     category: 'appliances',
     subCategory: 'drying',
+    max: 12,
   },
   {
     id: 3,
@@ -150,6 +166,7 @@ export const MOCK_PRODUCTS = [
     price: 8000,
     category: 'appliances',
     subCategory: 'drying',
+    max: 63,
   },
   {
     id: 4,
@@ -160,6 +177,7 @@ export const MOCK_PRODUCTS = [
     price: 25000,
     category: 'appliances',
     subCategory: 'drying',
+    max: 33,
   },
   {
     id: 5,
@@ -170,6 +188,7 @@ export const MOCK_PRODUCTS = [
     price: 15000,
     category: 'appliances',
     subCategory: 'drying',
+    max: 12,
   },
   {
     id: 6,
@@ -180,6 +199,7 @@ export const MOCK_PRODUCTS = [
     price: 20000,
     category: 'appliances',
     subCategory: 'drying',
+    max: 34,
   },
   {
     id: 7,
@@ -190,6 +210,7 @@ export const MOCK_PRODUCTS = [
     price: 5000,
     category: 'appliances',
     subCategory: 'cleaning',
+    max: 100,
   },
   {
     id: 8,
@@ -200,6 +221,7 @@ export const MOCK_PRODUCTS = [
     price: 8500,
     category: 'appliances',
     subCategory: 'cleaning',
+    max: 65,
   },
   {
     id: 9,
@@ -210,8 +232,8 @@ export const MOCK_PRODUCTS = [
     price: 10000,
     category: 'appliances',
     subCategory: 'cleaning',
+    max: 76,
   },
-  ,
   {
     id: 10,
     image:
@@ -221,8 +243,8 @@ export const MOCK_PRODUCTS = [
     price: 12000,
     category: 'appliances',
     subCategory: 'summerClimate',
+    max: 32,
   },
-  ,
   {
     id: 11,
     image:
@@ -232,8 +254,8 @@ export const MOCK_PRODUCTS = [
     price: 30000,
     category: 'appliances',
     subCategory: 'summerClimate',
+    max: 22,
   },
-  ,
   {
     id: 12,
     image:
@@ -243,5 +265,37 @@ export const MOCK_PRODUCTS = [
     price: 40000,
     category: 'appliances',
     subCategory: 'summerClimate',
+    max: 22,
+  },
+  {
+    id: 13,
+    image:
+      'https://c.dns-shop.ru/thumb/st1/fit_width/120/120/146dc0e2869216eec56abbab30ff5dc8/14348332b9a2fd53fbc071f47e06b908358b0ad52daa676b4aa58da7d9ec4c4e.jpg',
+    name: 'Вентиляторы',
+    shop: 'dns',
+    price: 40000,
+    category: 'appliances',
+    subCategory: 'summerClimate',
+    max: 55,
+  },
+  {
+    id: 14,
+    image: 'https://images.wbstatic.net/c246x328/new/24840000/24841226-1.jpg',
+    name: 'Bizon / Ботинки',
+    shop: 'wildberries',
+    price: 2587,
+    category: 'shoes',
+    subCategory: 'maleShoes',
+    max: 10,
+  },
+  {
+    id: 15,
+    image: 'https://images.wbstatic.net/c246x328/new/12180000/12182720-1.jpg',
+    name: 'БУТЕКС / Ботинки',
+    shop: 'wildberries',
+    price: 3816,
+    category: 'shoes',
+    subCategory: 'maleShoes',
+    max: 300,
   },
 ];

@@ -17,6 +17,7 @@ export interface IProductItem {
   name: string;
   image: string;
   price: number;
+  max: number;
 }
 
 export interface IProductResponse {

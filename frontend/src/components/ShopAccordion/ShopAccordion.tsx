@@ -11,6 +11,7 @@ import {
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { ProductInfo } from "components";
 import { IBasketProduct } from "store/user/types";
+import { IProductItem } from "api/types/catalog";
 
 import { toPrice, pluralize } from "helpers";
 import { IShopItem } from "api/types/catalog";
@@ -18,13 +19,23 @@ import { IShopItem } from "api/types/catalog";
 interface IShopAccordion {
   shop: IShopItem;
   products: Record<string, IBasketProduct>;
+  onDelete: (product: IProductItem) => void;
+  onChange: (value: string, product: IProductItem) => void;
 }
 
-export const ShopAccordion: React.FC<IShopAccordion> = ({ shop, products }) => {
+export const ShopAccordion: React.FC<IShopAccordion> = ({
+  shop,
+  products,
+  onDelete,
+  onChange,
+}) => {
   const productsCount = Object.keys(products).length;
-  const productsTotalCost = Object.entries(products).reduce((acc, [key, value]) => {
-    return acc + value.price;
-  }, 0)
+  const productsTotalCost = Object.entries(products).reduce(
+    (acc, [key, value]) => {
+      return acc + (value.price * value.count);
+    },
+    0
+  );
 
   return (
     <Accordion>
@@ -56,7 +67,11 @@ export const ShopAccordion: React.FC<IShopAccordion> = ({ shop, products }) => {
               return (
                 <Box key={key} mb={2}>
                   <Box pb={2}>
-                    <ProductInfo product={product} />
+                    <ProductInfo
+                      product={product}
+                      onDelete={onDelete}
+                      onChange={onChange}
+                    />
                   </Box>
                   <Divider />
                 </Box>
